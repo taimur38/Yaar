@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Yaar.Objects;
 using Yaar.Runnables;
+using Yaar.Views;
 
 namespace Yaar.Tickers
 {
@@ -27,6 +28,7 @@ namespace Yaar.Tickers
                 Brain.ListenerManager.CurrentListener.Output("{0}: {1}".Template(tweet.From_user_name, tweet.Text));
                 if(tweet.Entities != null && tweet.Entities.TwitterEntityUrls != null)
                     Brain.RunnableManager.Runnable = new ProcessRunnable(tweet.Entities.TwitterEntityUrls.First().Url);
+                TweetView.Create(tweet.Text, tweet.From_user_name);
             }
         }
 

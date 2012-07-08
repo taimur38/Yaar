@@ -1,9 +1,8 @@
-﻿<Views:Fadeable Cursor="Hand" x:Class="Yaar.Views.ImageView"
+﻿<Views:Slideable Cursor="Hand" x:Class="Yaar.Views.ImageView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:base="clr-namespace:Yaar.Views"
-               xmlns:Views="clr-namespace:Yaar.Views" Title="ImageView" Topmost="True" Height="300" Width="230" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" SizeToContent="Height">
-    <Grid Width="230">
-        <Image Name="Image" Width="230"/>
-
+               xmlns:Views="clr-namespace:Yaar.Views" Title="ImageView" Topmost="True" Height="300" Width="330" AllowsTransparency="True" ShowInTaskbar="False" WindowStyle="None" SizeToContent="Height">
+    <Grid Width="330">
+        <Image Name="Image" Width="330"/>
     </Grid>
-</Views:Fadeable>
+</Views:Slideable>

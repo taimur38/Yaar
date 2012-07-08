@@ -107,10 +107,13 @@
     <Compile Include="Tickers\XboxTicker.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\Settings.cs" />
-    <Compile Include="Views\Fadeable.cs" />
-    <Compile Include="Views\FadeableManager.cs" />
+    <Compile Include="Views\Slideable.cs" />
+    <Compile Include="Views\SlideableManager.cs" />
     <Compile Include="Views\ImageView.xaml.cs">
       <DependentUpon>ImageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TweetView.xaml.cs">
+      <DependentUpon>TweetView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +136,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TweetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

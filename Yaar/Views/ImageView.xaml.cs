@@ -20,14 +20,14 @@ namespace Yaar.Views
     /// <summary>
     /// Interaction logic for ImageView.xaml
     /// </summary>
-    public partial class ImageView : Fadeable
+    public partial class ImageView : Slideable
     {
         public static void Create(string url)
         {
             Application.Current.Dispatcher.Invoke(() =>
                                                       {
                                                           var view = new ImageView(url);
-                                                          view.FadeIn();
+                                                          view.SlideIn();
                                                       });
         }
 
@@ -36,7 +36,7 @@ namespace Yaar.Views
             Application.Current.Dispatcher.Invoke(() =>
                                                       {
                                                           var view = new ImageView(url, link);
-                                                          view.FadeIn();
+                                                          view.SlideIn();
                                                       });
         }
 
