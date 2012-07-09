@@ -31,7 +31,7 @@ namespace Yaar.Tickers
                     if (entry.Issued < last)
                         continue;
                     Brain.ListenerManager.CurrentListener.Output(Speech.Email.Parse(entry.Author.Name, entry.Title));
-                    EmailView.Create(entry.Author.Name, entry.Title);
+                    EmailView.Create(entry.Author.Name, entry.Title, entry.Link);
                     Brain.RunnableManager.Runnable  = new ProcessRunnable(entry.Link);
                 }
             }

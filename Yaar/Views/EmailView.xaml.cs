@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,19 +20,21 @@ namespace Yaar.Views
     /// </summary>
     public partial class EmailView : Slideable
     {
-        public EmailView(string from, string subject)
+        public EmailView(string from, string subject, string link)
         {
             InitializeComponent();
 
             this.From.Content = from;
             this.Subject.Text = subject;
+
+            this.MouseRightButtonUp += (sender, args) => Process.Start(link);
         }
 
-        public static void Create(string from, string subject)
+        public static void Create(string from, string subject, string link)
         {
             Application.Current.Dispatcher.Invoke(() =>
                                                       {
-                                                          var view = new EmailView(from, subject);
+                                                          var view = new EmailView(from, subject, link);
                                                           view.SlideIn();
                                                       });
         }

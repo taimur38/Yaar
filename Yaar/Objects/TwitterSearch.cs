@@ -5,6 +5,7 @@
 // 
 using System;
 using System.Globalization;
+using System.Linq;
 using Yaar.Objects;
 using Newtonsoft.Json;
 
@@ -41,11 +42,7 @@ namespace Yaar.Objects
 
         public static TwitterSearch FromUsers(params string[] users)
         {
-            var url = "http://search.twitter.com/search.json?include_entities=true&q=";
-            foreach (var twitter in users)
-            {
-                url += "from%3a{0}+OR+".Template(twitter);
-            }
+            var url = users.Aggregate("http://search.twitter.com/search.json?include_entities=true&q=", (current, twitter) => current + "from%3a{0}+OR+".Template(twitter));
             var json = new BrowserClient().DownloadString(url);
             return FromJson(json);
         }
@@ -88,7 +85,7 @@ namespace Yaar.Objects
     {
 
         public object[] Hashtags;
-        public TwitterEntityUrl[] TwitterEntityUrls;
+        public TwitterEntityUrl[] Urls;
         public User_mentions[] User_mentions;
 
         //Empty Constructor

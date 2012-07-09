@@ -26,9 +26,15 @@ namespace Yaar.Tickers
             foreach (var tweet in tweets.Results.Where(o => o.Time > last))
             {
                 Brain.ListenerManager.CurrentListener.Output("{0}: {1}".Template(tweet.From_user_name, tweet.Text));
-                if(tweet.Entities != null && tweet.Entities.TwitterEntityUrls != null)
-                    Brain.RunnableManager.Runnable = new ProcessRunnable(tweet.Entities.TwitterEntityUrls.First().Url);
-                TweetView.Create(tweet.Text, tweet.From_user_name);
+                if (tweet.Entities.Urls.Any())
+                {
+                    Brain.RunnableManager.Runnable = new ProcessRunnable(tweet.Entities.Urls.First().Url);
+                    foreach (var url in tweet.Entities.Urls)
+                        tweet.Text = tweet.Text.Replace(url.Url, "");
+                    TweetView.Create(tweet.Text, tweet.From_user_name, tweet.Entities.Urls.First().Url);
+                }
+                else
+                    TweetView.Create(tweet.Text, tweet.From_user_name);
             }
         }
 

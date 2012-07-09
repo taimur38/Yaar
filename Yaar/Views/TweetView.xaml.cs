@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,14 +29,24 @@ namespace Yaar.Views
             this.Tweet.Text = tweet;
             this.User.Text = user;
         }
+        
+        public TweetView(string tweet, string user, string link) : this(tweet, user)
+        {
+            this.MouseRightButtonUp += (sender, args) => Process.Start(link);
+        }
 
-        public static void Create(string tweet, string user)
+        public static void Create(string tweet, string user, string link)
         {
             Application.Current.Dispatcher.Invoke(() =>
                 {
-                    var view = new TweetView(tweet, user);
+                    var view = new TweetView(tweet, user, link);
                     view.SlideIn();
                 });
+        }
+
+        public static void Create(string tweet, string user)
+        {
+            Application.Current.Dispatcher.Invoke(() => new TweetView(tweet, user).SlideIn());
         }
     }
 }
