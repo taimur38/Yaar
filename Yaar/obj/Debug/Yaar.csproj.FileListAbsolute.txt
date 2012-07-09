@@ -23,3 +23,5 @@ C:\home\dev\Yaar\Yaar\obj\Debug\Yaar.exe
 C:\home\dev\Yaar\Yaar\obj\Debug\Yaar.pdb
 C:\home\dev\Yaar\Yaar\obj\Debug\Views\TweetView.g.cs
 C:\home\dev\Yaar\Yaar\obj\Debug\Views\TweetView.baml
+C:\home\dev\Yaar\Yaar\obj\Debug\Views\EmailView.g.cs
+C:\home\dev\Yaar\Yaar\obj\Debug\Views\EmailView.baml

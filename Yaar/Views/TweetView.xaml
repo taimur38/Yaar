@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:base="clr-namespace:Yaar.Views"
                Title="TweetView" Height="120" Width="330" Topmost="True" WindowStyle="None" AllowsTransparency="True" SizeToContent="WidthAndHeight">
     <Grid Background="#FF616060">
-        <TextBlock Name="Tweet" Text="Tweet Message goes here" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="10,10,10,10" Height="74" Width="310" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="Auto"/>
+        <TextBlock Name="Tweet" Text="Tweet Message goes here" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="10,10,10,10" Height="74" Width="310" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="Auto" Foreground="White"/>
         <TextBlock Text="User" Name="User" HorizontalAlignment="Right" Margin="0,89,10,0" VerticalAlignment="Top" Width="145" FontSize="16" FontWeight="Medium" Foreground="#FFD18121" TextAlignment="Right"/>
     </Grid>
 </base:Slideable>

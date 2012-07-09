@@ -20,14 +20,13 @@ namespace Yaar.Views
         public void SlideIn()
         {
             this.Show();
-            var slide = new DoubleAnimation(-340, 10, 500.Milliseconds());
+            var slide = new DoubleAnimation(-340, 10, 400.Milliseconds());
             this.BeginAnimation(LeftProperty, slide);
         }
 
         public void SlideOut()
         {
-            
-            var slideout = new DoubleAnimation(Top, -Height, 500.Milliseconds());
+            var slideout = new DoubleAnimation(Top, -Height, 400.Milliseconds());
             slideout.Completed += (sender, args) => this.Close();
             this.BeginAnimation(TopProperty, slideout);
             SlideableManager.RemoveFadeable(this);

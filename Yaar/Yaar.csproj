@@ -107,6 +107,9 @@
     <Compile Include="Tickers\XboxTicker.cs" />
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\Settings.cs" />
+    <Compile Include="Views\EmailView.xaml.cs">
+      <DependentUpon>EmailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Slideable.cs" />
     <Compile Include="Views\SlideableManager.cs" />
     <Compile Include="Views\ImageView.xaml.cs">
@@ -135,6 +138,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\EmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ImageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
