@@ -32,7 +32,7 @@ namespace Yaar.Views
         
         public TweetView(string tweet, string user, string link) : this(tweet, user)
         {
-            this.MouseRightButtonUp += (sender, args) => Process.Start(link);
+            this.MouseLeftButtonUp += (sender, args) => Process.Start(link);
         }
 
         public static void Create(string tweet, string user, string link)

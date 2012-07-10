@@ -35,7 +35,8 @@ namespace Yaar.Listeners
 
         private void _client_OnChannelMessage(Data ircdata)
         {
-            Handle(ircdata.Message);
+            if(ircdata.Nick == "AbstractClass")
+                Handle(ircdata.Message);
         }
 
         public override void Output(string output)

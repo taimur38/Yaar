@@ -25,7 +25,6 @@ namespace Yaar.Tickers
             var tweets = TwitterSearch.FromUsers(Brain.Settings.Twitters.ToArray());
             foreach (var tweet in tweets.Results.Where(o => o.Time > last))
             {
-                Brain.ListenerManager.CurrentListener.Output("{0}: {1}".Template(tweet.From_user_name, tweet.Text));
                 if (tweet.Entities.Urls.Any())
                 {
                     Brain.RunnableManager.Runnable = new ProcessRunnable(tweet.Entities.Urls.First().Url);
@@ -35,6 +34,7 @@ namespace Yaar.Tickers
                 }
                 else
                     TweetView.Create(tweet.Text, tweet.From_user_name);
+                Brain.ListenerManager.CurrentListener.Output("{0}: {1}".Template(tweet.From_user_name, tweet.Text));
             }
         }
 

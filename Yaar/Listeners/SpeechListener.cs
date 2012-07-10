@@ -40,8 +40,8 @@ namespace Yaar.Listeners
         {
             if (!Brain.Awake)
                 return;
-            if (_current != null)
-                _synthesizer.SpeakAsyncCancel(_current);
+            //if (_current != null)
+               // _synthesizer.SpeakAsyncCancel(_current);
             _current = _synthesizer.SpeakAsync(output);
         }
     }

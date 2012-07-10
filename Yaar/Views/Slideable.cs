@@ -14,7 +14,7 @@ namespace Yaar.Views
         {
             this.Left = SystemParameters.PrimaryScreenWidth;
             this.Top = SlideableManager.AddFadeable(this);
-            this.MouseLeftButtonUp += (sender, args) => this.SlideOut();
+            this.MouseRightButtonUp += (sender, args) => this.SlideOut();
         }
 
         public void SlideIn()
