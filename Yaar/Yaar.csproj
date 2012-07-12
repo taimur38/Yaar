@@ -102,6 +102,7 @@
     <Compile Include="Tickers\ClockTicker.cs" />
     <Compile Include="Tickers\FacebookTicker.cs" />
     <Compile Include="Tickers\GmailTicker.cs" />
+    <Compile Include="Tickers\ITicker.cs" />
     <Compile Include="Tickers\RssTicker.cs" />
     <Compile Include="Tickers\ScheduleTicker.cs" />
     <Compile Include="Tickers\TickerBase.cs" />
@@ -194,7 +195,12 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sounds\alarm.wav" />
+    <Content Include="Sounds\afroman-because_i_got_high.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\alarm.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -34,6 +34,7 @@ namespace Yaar.Tickers
                 if(source.New.IsOnline && source.Old.Presence != source.New.Presence)
                 {
                     Brain.ListenerManager.CurrentListener.Output(source.New.Description);
+                    ToastView.Create(source.New.Description, source.New.GamerTag, true);
                 }
             }
 

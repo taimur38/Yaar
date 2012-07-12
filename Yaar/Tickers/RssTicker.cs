@@ -13,7 +13,7 @@ namespace Yaar.Tickers
 
         public RssTicker(string url) : base(1.Minutes())
         {
-        
+            Url = url;
         }
 
         protected override void Tick()
