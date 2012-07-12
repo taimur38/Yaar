@@ -14,6 +14,7 @@ namespace Yaar.Objects.Reference
 
         public Search(string query)
         {
+            /*
             var url = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={0}".Template(query);
             var json = JToken.Parse(new BrowserClient().DownloadString(url));
             var results = json["responseData"]["results"].Select(o => new GoogleResult(o)).ToList();
@@ -36,6 +37,7 @@ namespace Yaar.Objects.Reference
                 Description = results[0].ToString().StripHtml().RemoveExtraSpaces().Trim();
                 Link = results[0].Link;
             }
+             * */
         }
     }
 }

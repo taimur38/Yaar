@@ -30,10 +30,10 @@ namespace Yaar.Tickers
                     Brain.RunnableManager.Runnable = new ProcessRunnable(tweet.Entities.Urls.First().Url);
                     foreach (var url in tweet.Entities.Urls)
                         tweet.Text = tweet.Text.Replace(url.Url, "");
-                    TweetView.Create(tweet.Text, tweet.From_user_name, tweet.Entities.Urls.First().Url);
+                    TweetView.Create(tweet.Text, tweet.From_user_name, tweet.Entities.Urls.First().Url, false);
                 }
                 else
-                    TweetView.Create(tweet.Text, tweet.From_user_name);
+                    TweetView.Create(tweet.Text, tweet.From_user_name, false);
                 Brain.ListenerManager.CurrentListener.Output("{0}: {1}".Template(tweet.From_user_name, tweet.Text));
             }
         }

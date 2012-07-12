@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Animation;
 
 namespace Yaar.Views
 {
@@ -27,6 +29,8 @@ namespace Yaar.Views
         public static void RemoveFadeable(Slideable f)
         {
             Fadeables.Remove(f);
+            foreach(var view in Fadeables.Where(o => o.Top > f.Top))
+                view.SlideTo(view.Left, view.Top - f.Height - 10);
         }
     }
 }

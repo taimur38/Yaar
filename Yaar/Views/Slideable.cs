@@ -15,21 +15,40 @@ namespace Yaar.Views
             this.Left = SystemParameters.PrimaryScreenWidth;
             this.Top = SlideableManager.AddFadeable(this);
             this.MouseRightButtonUp += (sender, args) => this.SlideOut();
+            this.MouseLeftButtonUp += (sender, args) => this.SlideOut();
         }
 
         public void SlideIn()
         {
-            this.Show();
-            var slide = new DoubleAnimation(-340, 10, 400.Milliseconds());
-            this.BeginAnimation(LeftProperty, slide);
+            Application.Current.Dispatcher.Invoke(() =>
+                                                      {
+                                                          this.Show();
+                                                          var slide = new DoubleAnimation(-340, 10, 400.Milliseconds());
+                                                          this.BeginAnimation(LeftProperty, slide);
+                                                      });
         }
 
         public void SlideOut()
         {
-            var slideout = new DoubleAnimation(Top, -Height, 400.Milliseconds());
-            slideout.Completed += (sender, args) => this.Close();
-            this.BeginAnimation(TopProperty, slideout);
-            SlideableManager.RemoveFadeable(this);
+            Application.Current.Dispatcher.Invoke(() =>
+                                                      {
+                                                          var slideout = new DoubleAnimation(Top, -Height,
+                                                                                             400.Milliseconds());
+                                                          slideout.Completed += (sender, args) => this.Close();
+                                                          this.BeginAnimation(TopProperty, slideout);
+                                                          SlideableManager.RemoveFadeable(this);
+                                                      });
+        }
+
+        public void SlideTo(double x, double y)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+                                                      {
+                                                          var slidex = new DoubleAnimation(Left, x, 400.Milliseconds());
+                                                          var slidey = new DoubleAnimation(Top, y, 400.Milliseconds());
+                                                          BeginAnimation(LeftProperty, slidex);
+                                                          BeginAnimation(TopProperty, slidey);
+                                                      });
         }
     }
 }

@@ -21,6 +21,7 @@ namespace Yaar.Listeners
             _client = new IrcClient {ChannelSyncing = true, SendDelay = 200, AutoRetry = true};
             _client.OnChannelMessage += _client_OnChannelMessage;
             _client.OnInvite += _client_OnInvite;
+            _client.AutoReconnect = true;
             _client.Connect("irc.freenode.net", 6667);
             _client.Login("[Yaar]", "[Yaar]");
             _client.Join("#yaar");

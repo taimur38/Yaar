@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yaar.Objects;
+using Yaar.Views;
 
 namespace Yaar.Tickers
 {
@@ -26,6 +27,7 @@ namespace Yaar.Tickers
                 {
                     var n = source.New.IsOnline;
                     Brain.ListenerManager.CurrentListener.Output(n ? source.New.Description : source.New.GamerTag + " has signed on.");
+                    TweetView.Create(source.New.Description, source.New.GamerTag, true);
                     continue;
                 }
 

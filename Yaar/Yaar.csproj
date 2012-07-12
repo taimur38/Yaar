@@ -100,7 +100,9 @@
     <Compile Include="Runnables\ProcessRunnable.cs" />
     <Compile Include="Runnables\RunnableManager.cs" />
     <Compile Include="Tickers\ClockTicker.cs" />
+    <Compile Include="Tickers\FacebookTicker.cs" />
     <Compile Include="Tickers\GmailTicker.cs" />
+    <Compile Include="Tickers\RssTicker.cs" />
     <Compile Include="Tickers\ScheduleTicker.cs" />
     <Compile Include="Tickers\TickerBase.cs" />
     <Compile Include="Tickers\TwitterTicker.cs" />
@@ -109,6 +111,9 @@
     <Compile Include="Utilities\Settings.cs" />
     <Compile Include="Views\EmailView.xaml.cs">
       <DependentUpon>EmailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FacebookBadge.xaml.cs">
+      <DependentUpon>FacebookBadge.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Slideable.cs" />
     <Compile Include="Views\SlideableManager.cs" />
@@ -139,6 +144,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\EmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FacebookBadge.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

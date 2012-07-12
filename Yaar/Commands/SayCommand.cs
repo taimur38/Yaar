@@ -15,7 +15,7 @@ namespace Yaar.Commands
         {
             var text = match.Groups[1].Value;
             //test code
-            TweetView.Create(text, "taimur38");
+            TweetView.Create(text, "taimur38", true);
             return text;
         }
 

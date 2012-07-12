@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,18 +36,40 @@ namespace Yaar.Views
             this.MouseLeftButtonUp += (sender, args) => Process.Start(link);
         }
 
-        public static void Create(string tweet, string user, string link)
+        public static void Create(string tweet, string user, string link, bool temporary)
         {
             Application.Current.Dispatcher.Invoke(() =>
                 {
                     var view = new TweetView(tweet, user, link);
                     view.SlideIn();
+                    if (temporary)
+                    {
+                        new Thread(() =>
+                        {
+                            Thread.Sleep(4.Seconds());
+                            if (view.IsVisible)
+                                view.SlideOut();
+                        }).Start();
+                    }
                 });
         }
 
-        public static void Create(string tweet, string user)
+        public static void Create(string tweet, string user, bool temporary)
         {
-            Application.Current.Dispatcher.Invoke(() => new TweetView(tweet, user).SlideIn());
+            Application.Current.Dispatcher.Invoke(() =>
+                                                      {
+                                                          var view = new TweetView(tweet, user);
+                                                          view.SlideIn();
+                                                          if(temporary)
+                                                          {
+                                                              new Thread(() =>
+                                                                             {
+                                                                                 Thread.Sleep(4.Seconds());
+                                                                                 if(view.IsVisible)
+                                                                                    view.SlideOut();
+                                                                             }).Start();
+                                                          }
+                                                      });
         }
     }
 }
