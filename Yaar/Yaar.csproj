@@ -120,8 +120,8 @@
     <Compile Include="Views\ImageView.xaml.cs">
       <DependentUpon>ImageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TweetView.xaml.cs">
-      <DependentUpon>TweetView.xaml</DependentUpon>
+    <Compile Include="Views\ToastView.xaml.cs">
+      <DependentUpon>ToastView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -155,7 +155,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TweetView.xaml">
+    <Page Include="Views\ToastView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,7 +1,7 @@
-﻿<base:Slideable x:Class="Yaar.Views.TweetView"
+﻿<base:Slideable x:Class="Yaar.Views.ToastView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:base="clr-namespace:Yaar.Views"
-               Title="TweetView" Width="330" Topmost="True" WindowStyle="None" AllowsTransparency="True" SizeToContent="WidthAndHeight" ShowInTaskbar="False">
+               Title="ToastView" Width="330" Topmost="True" WindowStyle="None" AllowsTransparency="True" SizeToContent="WidthAndHeight" ShowInTaskbar="False">
     <StackPanel Background="#FF616060">
         <TextBlock Name="Tweet" Text="Tweet Message goes here" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="Wrap" Margin="10,10,0,0" Width="310" FontSize="16" LineStackingStrategy="BlockLineHeight" LineHeight="Auto" Foreground="White"/>
         <TextBlock Text="User" Name="User" HorizontalAlignment="Right" Margin="0,5,10,10" VerticalAlignment="Top" Width="310" FontSize="16" FontWeight="Medium" Foreground="#FFD18121" TextAlignment="Right"/>

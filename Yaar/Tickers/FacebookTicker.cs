@@ -21,7 +21,7 @@ namespace Yaar.Tickers
         {
             Brain.ListenerManager.CurrentListener.Output(item.Title);
             Brain.RunnableManager.Runnable = new ProcessRunnable(item.Link);
-            TweetView.Create(item.Title, "facebook", item.Link, false);
+            ToastView.Create(item.Title, "facebook", item.Link, false);
         }
     }
 }

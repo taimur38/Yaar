@@ -19,11 +19,11 @@ using System.Windows.Shapes;
 namespace Yaar.Views
 {
     /// <summary>
-    /// Interaction logic for TweetView.xaml
+    /// Interaction logic for ToastView.xaml
     /// </summary>
-    public partial class TweetView : Slideable
+    public partial class ToastView : Slideable
     {
-        public TweetView(string tweet, string user)
+        public ToastView(string tweet, string user)
         {
             InitializeComponent();
 
@@ -31,7 +31,7 @@ namespace Yaar.Views
             this.User.Text = user;
         }
         
-        public TweetView(string tweet, string user, string link) : this(tweet, user)
+        public ToastView(string tweet, string user, string link) : this(tweet, user)
         {
             this.MouseLeftButtonUp += (sender, args) => Process.Start(link);
         }
@@ -40,7 +40,7 @@ namespace Yaar.Views
         {
             Application.Current.Dispatcher.Invoke(() =>
                 {
-                    var view = new TweetView(tweet, user, link);
+                    var view = new ToastView(tweet, user, link);
                     view.SlideIn();
                     if (temporary)
                     {
@@ -58,7 +58,7 @@ namespace Yaar.Views
         {
             Application.Current.Dispatcher.Invoke(() =>
                                                       {
-                                                          var view = new TweetView(tweet, user);
+                                                          var view = new ToastView(tweet, user);
                                                           view.SlideIn();
                                                           if(temporary)
                                                           {
