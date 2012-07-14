@@ -15,7 +15,7 @@ namespace Yaar.Commands
         {
             var text = match.Groups[1].Value;
             //test code
-            ToastView.Create(text, "taimur38", true);
+            ToastView.Create(text, "taimur38", false);
             return text;
         }
 

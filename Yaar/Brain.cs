@@ -9,6 +9,7 @@ using Yaar.Listeners;
 using Yaar.Runnables;
 using Yaar.Tickers;
 using Yaar.Utilities;
+using Yaar.Views;
 
 namespace Yaar
 {
@@ -53,6 +54,8 @@ namespace Yaar
                 .Where(o => o.GetConstructors().Any(x => x.GetParameters().Length == 0))
                 .Select(source => (TickerBase) Activator.CreateInstance(source)).ToList()
                 .ForEach(o => o.Start());
+
+            ToastView.Create("testing", "test", false);
         }
     }
 }

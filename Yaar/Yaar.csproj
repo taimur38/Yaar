@@ -73,6 +73,7 @@
     <Compile Include="Commands\RunnableCommand.cs" />
     <Compile Include="Commands\SayCommand.cs" />
     <Compile Include="Commands\ScheduleCommand.cs" />
+    <Compile Include="Commands\ScheduleListCommand.cs" />
     <Compile Include="Commands\SearchCommand.cs" />
     <Compile Include="Commands\VideoCommand.cs" />
     <Compile Include="Commands\WolframCommand.cs" />
