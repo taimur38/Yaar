@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace Yaar.Views
@@ -16,6 +17,19 @@ namespace Yaar.Views
             this.Top = SlideableManager.AddFadeable(this);
             this.MouseRightButtonUp += (sender, args) => this.SlideOut();
             this.MouseLeftButtonUp += (sender, args) => this.SlideOut();
+            this.MouseDown +=
+                (sender, args) =>
+                    {
+                        if (args.ChangedButton == MouseButton.Middle && args.ButtonState == MouseButtonState.Pressed)
+                            SlideableManager.DismissAll();
+                    };
+            this.MouseWheel += (sender, args) =>
+                                   {
+                                       if(args.Delta > 0)
+                                           SlideableManager.ScrollUp();
+                                       else
+                                           SlideableManager.ScrollDown();
+                                   };
         }
 
         public void SlideIn()

@@ -75,6 +75,7 @@
     <Compile Include="Commands\ScheduleCommand.cs" />
     <Compile Include="Commands\ScheduleListCommand.cs" />
     <Compile Include="Commands\SearchCommand.cs" />
+    <Compile Include="Commands\TorrentCommand.cs" />
     <Compile Include="Commands\VideoCommand.cs" />
     <Compile Include="Commands\WolframCommand.cs" />
     <Compile Include="Commands\XboxCommand.cs" />
@@ -195,7 +196,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sounds\alarm.wav" />
+    <Content Include="Sounds\alarm.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

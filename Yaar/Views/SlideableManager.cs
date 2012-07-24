@@ -10,27 +10,60 @@ namespace Yaar.Views
 {
     static class SlideableManager
     {
-        private static readonly List<Slideable> Fadeables;
+        private static readonly List<Slideable> Slideables;
+        private static bool _dismissingAll = false;
 
         static SlideableManager()
         {
-            Fadeables = new List<Slideable>();
+            Slideables = new List<Slideable>();
         }
 
         public static double AddFadeable(Slideable f)
         {
-            Fadeables.Add(f);
-            if (Fadeables.Count == 1)
+            Slideables.Add(f);
+            if (Slideables.Count == 1)
                 return 10;
-            var last = Fadeables[Fadeables.Count - 2];
+            var last = Slideables[Slideables.Count - 2];
             return last.Top + last.Height + 10;
         }
 
         public static void RemoveFadeable(Slideable f)
         {
-            Fadeables.Remove(f);
-            foreach(var view in Fadeables.Where(o => o.Top > f.Top))
+            Slideables.Remove(f);
+            if (_dismissingAll) return;
+            foreach(var view in Slideables.Where(o => o.Top > f.Top))
                 view.SlideTo(view.Left, view.Top - f.Height - 10);
+        }
+
+        public static void DismissAll()
+        {
+            _dismissingAll = true;
+            while(Slideables.Count > 0)
+            {
+                Slideables.First().SlideOut();
+            }
+            _dismissingAll = false;
+        }
+
+        public static Slideable TopVisibleView()
+        {
+            return Slideables.FirstOrDefault(o => o.Top == 10);
+        }
+
+        public static void ScrollUp()
+        {
+            var top = Slideables.MaxBy(o => o.Top);
+
+            foreach (var slideable in Slideables)
+                slideable.SlideTo(slideable.Left, slideable.Top - top.Height);
+        }
+
+        public static void ScrollDown()
+        {
+            var top = Slideables.MaxBy(o => o.Top);
+
+            foreach(var slideable in Slideables)
+                slideable.SlideTo(slideable.Left, slideable.Top + top.Height);
         }
     }
 }
