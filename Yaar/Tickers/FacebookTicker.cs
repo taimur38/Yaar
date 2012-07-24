@@ -11,9 +11,8 @@ namespace Yaar.Tickers
 {
     class FacebookTicker : RssTicker
     {
-        private const string Url = "https://www.facebook.com/feeds/notifications.php?id=1346146357&viewer=1346146357&key=AWjoZJQSSGIdslcY&format=rss20";
         
-        public FacebookTicker() : base(Url)
+        public FacebookTicker() : base(Brain.Settings.Facebook)
         {
         }
 

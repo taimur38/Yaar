@@ -18,11 +18,14 @@ namespace Yaar.Utilities
             _json = JToken.Parse(File.ReadAllText(Constants.SettingsFile.FullName));
             Twitters = _json["Twitters"].Select(o => o.ToString()).ToList();
             Videos = _json["Videos"].Select(o => new DirectoryInfo(o.ToString())).ToList();
+            Facebook = _json["Facebook"].ToString();
 
             //Emails
             Accounts = new List<EmailAccount>();
             foreach(var account in _json["Emails"])
                 Accounts.Add(new EmailAccount(account["Email"].ToString(), account["Password"].ToString()));
+
+            
 
             //Alarms
             Wake = DateTime.ParseExact(_json["Wake"].ToString(), "HH:mm", CultureInfo.CurrentCulture).TimeOfDay;
@@ -34,6 +37,7 @@ namespace Yaar.Utilities
         public List<EmailAccount> Accounts { get; private set; }
         public TimeSpan Wake { get; private set; }
         public TimeSpan Sleep { get; private set; }
+        public string Facebook { get; private set; }
 
         public class EmailAccount
         {

@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace Yaar.Tickers
 {
-    abstract class TickerBase
+    abstract class TickerBase : ITicker
     {
         private readonly Timer _timer;
         protected TimeSpan Interval;

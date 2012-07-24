@@ -13,7 +13,7 @@ namespace Yaar.Tickers
 
         public ClockTicker() : base(1000)
         {
-            _alarm = new SoundPlayer("Sounds/alarm.wav");
+            _alarm = new SoundPlayer("Sounds/afroman-because_i_got_high.wav");
             Instance = this;
         }
 

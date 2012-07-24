@@ -50,9 +50,9 @@ namespace Yaar
 
             //Tickers
             typeof(TickerBase).Assembly.GetTypes()
-                .Where(o => o.BaseType == typeof(TickerBase))
+                .Where(o => o.GetInterface(typeof(ITicker).FullName) != null && o.IsClass)
                 .Where(o => o.GetConstructors().Any(x => x.GetParameters().Length == 0))
-                .Select(source => (TickerBase) Activator.CreateInstance(source)).ToList()
+                .Select(source => (ITicker) Activator.CreateInstance(source)).ToList()
                 .ForEach(o => o.Start());
 
             ToastView.Create("testing", "test", false);
