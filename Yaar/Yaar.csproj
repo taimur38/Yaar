@@ -197,12 +197,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <Content Include="Sounds\afroman-because_i_got_high.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
->>>>>>> origin/master
     <Content Include="Sounds\alarm.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
