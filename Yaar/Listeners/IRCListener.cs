@@ -40,13 +40,13 @@ namespace Yaar.Listeners
             _client = new IrcClient { ChannelSyncing = true, SendDelay = 200, AutoRetry = true };
             _client.OnChannelMessage += ircdata =>
                                             {
-                                                if (ircdata.Nick == "AbstractClass")
+                                                if (ircdata.Nick == "Taimur")
                                                     Handle(ircdata.Message);
                                             };
 
             _client.OnInvite += (inviter, channel, ircdata) => _client.Join(ircdata.Message);
             
-            _client.Connect("irc.freenode.net", 6667);
+            _client.Connect("irc.rizon.net", 6667);
             _client.Login("[Yaar]", "[Yaar]");
             _client.Join("#yaar");
 
