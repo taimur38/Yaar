@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Jarvis.Objects.Reference;
 using Newtonsoft.Json.Linq;
 
 namespace Yaar.Objects.Reference
@@ -14,30 +15,30 @@ namespace Yaar.Objects.Reference
 
         public Search(string query)
         {
-            /*
-            var url = "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q={0}".Template(query);
-            var json = JToken.Parse(new BrowserClient().DownloadString(url));
-            var results = json["responseData"]["results"].Select(o => new GoogleResult(o)).ToList();
-            var result = results.FirstOrDefault(o => o.Link.ToLower().Contains("imdb"));
+            var google = Google.FromQuery(query);
+            var results = google.ResponseData.Results;
+            var lucky = results[0];
+
+            Link = lucky.Url;
+            Description = lucky.Content.StripHtml();
+
+            var result = results.FirstOrDefault(o => o.Url.ToLower().Contains("imdb"));
             if(result != null)
             {
-                Description += new IMDB(result.Link) + Environment.NewLine;
-                Link = result.Link;
+                var imdb = IMDB.FromQuery(query);
+                Description =
+                    "{0} is a movie rated {1} by IMDB. It came out in {2} and the synopsis reads: ".Template(
+                        imdb.Title, imdb.ImdbRating, imdb.Released, imdb.Plot);
+                Link = imdb.Page;
+                return;
             }
 
-            result = results.FirstOrDefault(o => o.Link.ToLower().Contains("wikipedia"));
+            result = results.FirstOrDefault(o => o.Url.ToLower().Contains("wikipedia"));
             if(result != null)
             {
-                Description += new Wikipedia(result.Link) + Environment.NewLine;
-                Link = result.Link;
+                Description = new Wikipedia(result.Url) + Environment.NewLine;
+                Link = result.Url;
             }
-
-            if(string.IsNullOrEmpty(Description))
-            {
-                Description = results[0].ToString().StripHtml().RemoveExtraSpaces().Trim();
-                Link = results[0].Link;
-            }
-             * */
         }
     }
 }
