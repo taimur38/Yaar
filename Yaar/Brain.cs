@@ -17,7 +17,7 @@ namespace Yaar
     {
         public static ListenerManager ListenerManager { get; private set; }
         public static RunnableManager RunnableManager { get; private set; }
-        public static Settings Settings { get; private set; }
+        public static Settings Settings { get; set; }
 
         private static Pipe Pipe { get; set; }
 
