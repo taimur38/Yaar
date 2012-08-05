@@ -1,6 +1,8 @@
 ﻿﻿using System;
 ﻿using System.IO;
 ﻿using System.Net;
+using System.Data.SQLite;
+
 
 namespace Yaar.Objects
 {
@@ -18,7 +20,13 @@ namespace Yaar.Objects
 
         public BrowserClient(string host) : this()
         {
-           /* var result = "";
+            var result = "";
+            var splits = host.Split('.');
+            var domain = host;
+            if (splits.Length == 3)
+                domain = "." + splits[1] + "." + splits[2];
+            else
+                domain = "www." + host;
             try
             {
                 var strPath = GetChromeCookie();
@@ -26,15 +34,28 @@ namespace Yaar.Objects
 
                 using(var conn = new SQLiteConnection(strDb))
                 {
-                    
-                }
+                    using(SQLiteCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText =
+                            "SELECT name || '=' || value || ';' FROM cookies WHERE host_key = '{0}' OR host_key='{1}'".
+                                Template(host, domain);
+
+                        conn.Open();
+                        using(SQLiteDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                                result += reader.GetString(0);
+                        }
+                    }
+
+                    conn.Close();
+                } 
             }
-            catch (Exception)
+            catch
             {
-                
-                throw;
             }
-            * */
+            this.Headers[HttpRequestHeader.Cookie] = result;
+            
         }
 
         private static string GetChromeCookie()

@@ -19,7 +19,7 @@ namespace Yaar
         public static RunnableManager RunnableManager { get; private set; }
         public static Settings Settings { get; set; }
 
-        private static Pipe Pipe { get; set; }
+        public static Pipe Pipe { get; set; }
 
         public static bool Awake { get; set; }
 

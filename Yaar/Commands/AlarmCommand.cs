@@ -11,6 +11,7 @@ namespace Yaar.Commands
 {
     class AlarmCommand : ICommand
     {
+
         public string Handle(string input, Match match, IListener listener)
         {
             ClockTicker.Instance.StopAlarm();
