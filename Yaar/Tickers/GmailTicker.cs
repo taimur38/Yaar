@@ -26,7 +26,7 @@ namespace Yaar.Tickers
             {
                 var doc = GetAtom(emailAccount.Email, emailAccount.Password);
                 var last = DateTime.Now.Subtract(1.Minutes());
-                foreach(var entry in from XmlNode node in doc.DocumentElement.SelectNodes("/feed/entry") select new AtomEntry(node))
+                foreach(var entry in from XmlNode node in doc.DocumentElement.SelectNodes("/feed/entry") where node != null select new AtomEntry(node))
                 {
                     if (entry.Issued < last)
                         continue;

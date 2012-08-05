@@ -26,7 +26,10 @@ namespace Yaar.Listeners
                    Setup();
                    _client.Listen();
                }
-               catch {}
+               catch (Exception e)
+               {
+                  
+               }
 
                Thread.Sleep(5.Seconds());
            }

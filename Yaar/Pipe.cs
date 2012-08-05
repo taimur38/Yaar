@@ -35,7 +35,7 @@ namespace Yaar
                         continue;
                     try
                     {
-                        Function(input, match, listener);
+                        listener.Output(Function(input, match, listener));
                     }
                     catch(Exception e)
                     {
@@ -68,9 +68,11 @@ namespace Yaar
             if (input == null) return;
             input = input.ToLower();
 
-            if(_next != null)
-                _next.Execute(input, listener);
-            
+            if (_next != null && _next.Execute(input, listener))
+            {
+                _next = null;
+            }
+
             foreach (var command in _commands)
             {
                 var match = input.RegexMatch(command.Regexes);
@@ -80,7 +82,7 @@ namespace Yaar
                 }
             }
 
-            _next = null;
+            //_next = null;
         }
     }
 }

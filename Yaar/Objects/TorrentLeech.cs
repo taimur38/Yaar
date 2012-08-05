@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Yaar.Utilities;
 
 namespace Yaar.Objects
 {
@@ -55,19 +56,24 @@ namespace Yaar.Objects
         public TorrentLeechEntry(HtmlNode node)
         {
             Title = node.SelectSingleNode(".//span[@class='title']/a").InnerText;
-            Friendly = Title;
+            Friendly = Title.TorrentName();
             var size = node.SelectSingleNode(".//td[5]").InnerText;
             double number = double.Parse(size.RegexMatch(@"\d+").Value);
             if(size.Contains("GB"))
                 number *= 1024;
             Size = number;
-
+            Torrent = "http://torrentleech.org" + node.SelectSingleNode(".//td[@class='quickdownload']/a").Attributes["href"].Value;
         }
 
         public string Title { get; private set; }
         public string Friendly { get; private set; }
-        public string Download { get; private set; }
         public double Size { get; private set; }
+        public string Torrent { get; private set; }
+
+        public void Download()
+        {
+            var path = Friendly + ".torrent";
+        }
 
         public bool Equals(object obj)
         {

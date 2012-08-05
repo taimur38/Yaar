@@ -30,7 +30,7 @@ namespace Yaar.Commands
 
                     return results.Aggregate(string.Empty, (current, result) => current + (result.Title + " " + result.Size + Environment.NewLine));
 
-                }, "", null);
+                }, "movie", "game");
 
             return "How would you like me to refine that search, sir";
         }
