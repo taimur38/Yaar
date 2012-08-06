@@ -6,7 +6,7 @@ using System.Data.SQLite;
 
 namespace Yaar.Objects
 {
-    internal class BrowserClient : WebClient
+    public class BrowserClient : WebClient
     {
         public BrowserClient()
         {

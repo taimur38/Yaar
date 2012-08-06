@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,16 @@ namespace Yaar.Objects
             var doc = new HtmlDocument();
             doc.LoadHtml(_browser.DownloadString(url));
             return
-                doc.DocumentNode.SelectNodes("//*[@id='torrenttable']/tbody/tr").Select(o => new TorrentLeechEntry(o)).
+                doc.DocumentNode.SelectNodes("//*[@id='torrenttable']/tbody/tr").Select(o => new TorrentLeechEntry(o, _browser)).
                     ToList();
+        }
+
+        public List<TorrentLeechEntry> Search(string query)
+        {
+            var url =
+                "http://www.torrentleech.org/torrents/browse/index/query/-pack+-collection+{0}/categories/10%2C11%2C14%2C17/orderby/seeders/order/desc"
+                    .Template(query);
+            return Fetch(url);
         }
 
         public List<TorrentLeechEntry> Movies()
@@ -53,8 +62,10 @@ namespace Yaar.Objects
 
     public class TorrentLeechEntry
     {
-        public TorrentLeechEntry(HtmlNode node)
+        private readonly BrowserClient _client;
+        public TorrentLeechEntry(HtmlNode node, BrowserClient client)
         {
+            _client = client;
             Title = node.SelectSingleNode(".//span[@class='title']/a").InnerText;
             Friendly = Title.TorrentName();
             var size = node.SelectSingleNode(".//td[5]").InnerText;
@@ -73,6 +84,8 @@ namespace Yaar.Objects
         public void Download()
         {
             var path = Friendly + ".torrent";
+            _client.DownloadFile(Torrent, path);
+            Process.Start(path);
         }
 
         public bool Equals(object obj)

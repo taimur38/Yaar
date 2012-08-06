@@ -70,7 +70,7 @@ namespace Yaar
 
             if (_next != null && _next.Execute(input, listener))
             {
-                _next = null;
+               // _next = null;
             }
 
             foreach (var command in _commands)
