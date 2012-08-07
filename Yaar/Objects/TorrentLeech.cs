@@ -30,7 +30,7 @@ namespace Yaar.Objects
         public List<TorrentLeechEntry> Search(string query)
         {
             var url =
-                "http://www.torrentleech.org/torrents/browse/index/query/-pack+-collection+{0}/categories/10%2C11%2C14%2C17/orderby/seeders/order/desc"
+                "http://www.torrentleech.org/torrents/browse/index/query/-pack+-collection+{0}/categories/10,11,14,2,26,32,17/orderby/seeders/order/desc"
                     .Template(query);
             return Fetch(url);
         }
