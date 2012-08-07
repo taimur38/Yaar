@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Yaar.Listeners;
+using Yaar.Utilities;
 
 namespace Yaar.Commands
 {
@@ -16,11 +17,12 @@ namespace Yaar.Commands
         public string Handle(string input, Match match, IListener listener)
         {
             var q = match.Groups[1].Value.Trim();
-            q = "*{0}".Template(q.RegexReplace(@"[\s]", "*"));
-            var videos = Brain.Settings.Videos.SelectMany(d => d.GetFiles(q, SearchOption.AllDirectories)).ToList();
-            var video = videos.OrderByDescending(o => o.CreationTime).FirstOrDefault();
+            //q = "*{0}".Template(q.RegexReplace(@"[\s]", "*"));
+            var videos = Brain.Settings.Videos.SelectMany(d => d.GetFiles("*", SearchOption.AllDirectories)).ToList();
+            var results = videos.Where(o => o.Name.TorrentName().ToLower().Contains(q)).OrderByDescending(o => o.Length);
+            var video = results.FirstOrDefault();
             if (video == null)
-                return "I couldn't find the video yaar";
+                return "I couldn't find the video";
             Process.Start(video.FullName);
             var name = video.Name.Replace(".", " ").Trim().RegexRemove(video.Extension);
             name = name.RegexReplace(@"s(\d+)", "Season $1 ");

@@ -28,14 +28,17 @@ namespace Yaar.Commands
 
             Brain.Pipe.ListenNext((input2, match2, listener2) =>
                                       {
+                                          if (match2.Value == "cancel" || match2.Value == "none" || match2.Value == "nevermind")
+                                              return "Cancelled";
+
                                           var index = -1;
                                           int.TryParse(match2.Groups[1].Value, out index);
-                                          if (index == -1)
+                                          if (index == -1 || index >= results.Count)
                                               return "Cancelled";
 
                                           var selected = results[index];
                                           selected.Download();
-                                          return "Begun downloading: " + selected.Friendly;
+                                          return "Downloading: " + selected.Friendly;
                                       }, "cancel|none|nevermind", @"download (\d+)");
                     return res;
         }
