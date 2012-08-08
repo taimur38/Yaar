@@ -22,5 +22,11 @@ namespace Yaar.Utilities
             output = output.RemoveExtraSpaces();
             return output;
         }
+
+        public static bool IsVideoType(this string extension)
+        {
+            const string types = ".mkv .avi .mp4";
+            return types.Contains(extension);
+        }
     }
 }
