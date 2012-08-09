@@ -37,8 +37,8 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.4\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="Meebey.SmartIrc4net">
-      <HintPath>..\packages\Meebey.SmartIrc4net.dll</HintPath>
+    <Reference Include="IrcDotNet">
+      <HintPath>..\packages\IrcDotNet.0.4.1\lib\net40\IrcDotNet.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -77,6 +77,7 @@
     </ApplicationDefinition>
     <Compile Include="Commands\AlarmCommand.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
+    <Compile Include="Commands\MuteCommand.cs" />
     <Compile Include="Commands\NetflixCommand.cs" />
     <Compile Include="Commands\RatingCommand.cs" />
     <Compile Include="Commands\ReloadCommand.cs" />

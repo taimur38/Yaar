@@ -18,6 +18,7 @@ namespace Yaar
         public static ListenerManager ListenerManager { get; private set; }
         public static RunnableManager RunnableManager { get; private set; }
         public static Settings Settings { get; set; }
+        public static bool Muted { get; set; }
 
         public static Pipe Pipe { get; set; }
 
@@ -35,6 +36,7 @@ namespace Yaar
             Awake = true;
             Settings = new Settings();
             Pipe = new Pipe();
+            Muted = false;
 
             //Listeners
             ListenerManager = new ListenerManager(Pipe);

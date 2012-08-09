@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Meebey.SmartIrc4net;
+using IrcDotNet;
 
 namespace Yaar.Listeners
 {
@@ -15,56 +15,67 @@ namespace Yaar.Listeners
         public IRCListener(Pipe pipe)
             : base(pipe)
         {
+            _client = new IrcClient();
+            _client.FloodPreventer = new IrcStandardFloodPreventer(4, 2000);
         }
 
         public override void Loop()
         {
            while(true)
            {
-               try
+               using (var mre = new ManualResetEvent(false))
                {
-                   Setup();
-                   _client.Listen();
-               }
-               catch (Exception e)
-               {
-                  
-               }
+                   if(_client != null)
+                       _client.Disconnect();
 
-               Thread.Sleep(5.Seconds());
-           }
-        }
-        
-        public void Setup()
-        {
-            if (_client != null)
-                _client.Disconnect();
-
-            _client = new IrcClient { ChannelSyncing = true, SendDelay = 200, AutoRetry = true };
-            _client.OnChannelMessage += ircdata =>
+                   _client = new IrcClient();
+                   _client.Registered += (sender, args) =>
+                                        {
+                                            _client.LocalUser.JoinedChannel += (sender1, args1) =>
                                             {
-                                                if (ircdata.Nick == "Taimur")
-                                                    Handle(ircdata.Message);
+                                                args1.Channel.MessageReceived += (o, eventArgs) =>
+                                                {
+                                                    if (eventArgs.Source.Name == "Taimur")
+                                                        Handle(eventArgs.Text);
+                                                };
+                                                
+                                                Output("Joined " + args1.Channel.Name);
+                                                mre.Set();
                                             };
+                                            
+                                            _client.Channels.Join("#yaar");
+                                        };
 
-            _client.OnInvite += (inviter, channel, ircdata) => _client.Join(ircdata.Message);
-            
-            _client.Connect("irc.rizon.net", 6667);
-            _client.Login("[Yaar]", "[Yaar]");
-            _client.Join("#yaar");
-
+                   _client.Connect("irc.rizon.net", 6667, false, new IrcUserRegistrationInfo()
+                                                                     {
+                                                                         NickName = "[Yaar]",
+                                                                         UserName = "[Yaar]",
+                                                                         RealName = "[Yaar]"
+                                                                     });
+                   mre.WaitOne(30.Seconds());
+                   while(_client.IsConnected)
+                       5.Seconds().Sleep();
+               }
+               Brain.ListenerManager.CurrentListener.Output("Failed to connect to Rizon.");
+           }
         }
 
         public override void Output(string output)
         {
-            var lines = output.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var line in lines)
+            if (_client.IsRegistered)
             {
-                foreach (var channel in _client.JoinedChannels)
-                    _client.Message(SendType.Message, channel, line);
-
-                Brain.ListenerManager.Speech.Output(line);
+                var lines = output.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+                foreach (var line in lines)
+                {
+                    foreach (var channel in _client.Channels)
+                    {
+                        _client.LocalUser.SendMessage(channel, line);
+                    }
+                }
             }
+
+            if(!Brain.Muted)
+                Brain.ListenerManager.Speech.Output(output);
         }
 
 
