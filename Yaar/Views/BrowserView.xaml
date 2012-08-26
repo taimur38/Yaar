@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Yaar.Views.BrowserView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BrowserView" Height="200" Width="300" ResizeMode="CanResizeWithGrip" ShowInTaskbar="False" Topmost="True">
+        Title="BrowserView" Height="200" Width="300" ResizeMode="CanResizeWithGrip" ShowInTaskbar="False" Topmost="True" WindowStyle="None">
     <Grid>
         <WebBrowser Name="Browser" />
     </Grid>

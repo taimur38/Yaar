@@ -19,7 +19,10 @@ namespace Yaar.Tickers
 
         protected override void Tick()
         {
+            /*
             var xbox = XboxLive.FromGamerTag("tst9391");
+            if (xbox == null)
+                return;
             if (!xbox.Success) return;
             foreach (var source in xbox.Friends.Select(x => new { Old = _old.Friends.FirstOrDefault(o => o.GamerTag == x.GamerTag), New = x}))
             {
@@ -39,6 +42,7 @@ namespace Yaar.Tickers
             }
 
             _old = xbox;
+             * */
         }
     }
 }

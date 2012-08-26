@@ -22,8 +22,11 @@ namespace Yaar.Objects
         {
             var doc = new HtmlDocument();
             doc.LoadHtml(_browser.DownloadString(url));
+            var nodes = doc.DocumentNode.SelectNodes("//*[@id='torrenttable']/tbody/tr");
+            if (nodes == null)
+                return new List<TorrentLeechEntry>();
             return
-                doc.DocumentNode.SelectNodes("//*[@id='torrenttable']/tbody/tr").Select(o => new TorrentLeechEntry(o, _browser)).
+                nodes.Select(o => new TorrentLeechEntry(o, _browser)).
                     ToList();
         }
 

@@ -22,8 +22,6 @@ namespace Yaar.Commands
             results = videos.Where(o => o.Name.TorrentName().ToLower().Contains(q) && o.Extension.IsVideoType() && !o.Name.Contains("sample"))
                                 .OrderByDescending(o => o.LastWriteTime);
 
-            Brain.Pipe.ListenNext(MatchEvaluator, "(.+)");
-
             var response = results.Aggregate(string.Empty, (current, item) => current + (item.Name.TorrentName() + ": " + item.Length/1048576 + "MB" + Environment.NewLine));
 
             if (results.Count() == 1)
@@ -31,6 +29,8 @@ namespace Yaar.Commands
                 Process.Start(results.First().FullName);
                 return "Playing " + results.First().Name.TorrentName();
             }
+
+            Brain.Pipe.ListenNext(MatchEvaluator, "(.+)");
 
             return response;
 
@@ -49,6 +49,7 @@ namespace Yaar.Commands
             if(count == 1)
             {
                 Process.Start(results.First().FullName);
+                
                 return "Playing " + results.First().Name.TorrentName();
             }
 

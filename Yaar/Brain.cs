@@ -56,8 +56,6 @@ namespace Yaar
                 .Where(o => o.GetConstructors().Any(x => x.GetParameters().Length == 0))
                 .Select(source => (ITicker) Activator.CreateInstance(source)).ToList()
                 .ForEach(o => o.Start());
-
-            ToastView.Create("testing", "test", false);
         }
     }
 }
