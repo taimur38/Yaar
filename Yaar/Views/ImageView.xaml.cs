@@ -56,7 +56,7 @@ namespace Yaar.Views
 
         public ImageView(string url, string link) : this(url)
         {
-            Image.MouseRightButtonUp += (sender, args) => Process.Start(link);
+            Image.MouseLeftButtonUp += (sender, args) => Process.Start(link);
         }
 
     }

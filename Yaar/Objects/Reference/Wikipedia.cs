@@ -37,7 +37,8 @@ namespace Yaar.Objects.Reference
             {
                 foreach(var sentence in text.RegexSplit(@"\.\n|\. ").Where(o => !string.IsNullOrWhiteSpace(o)).Select(o => o.Trim()))
                 {
-                    _description += sentence + (sentence.EndsWith(".") ? "" : ".") + Environment.NewLine;
+                    var _sentence = sentence.RegexRemove("\\(.+?\\)");
+                    _description += _sentence + (_sentence.EndsWith(".") ? "" : ".") + Environment.NewLine;
                     if (_description.Length > 300)
                         goto BreakLoops;
                 }

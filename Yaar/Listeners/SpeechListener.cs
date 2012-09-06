@@ -40,6 +40,7 @@ namespace Yaar.Listeners
         {
             if (!Brain.Awake)
                 return;
+            output = output.StripHtml().RemoveExtraSpaces();
             //if (_current != null)
                // _synthesizer.SpeakAsyncCancel(_current);
             _current = _synthesizer.SpeakAsync(output);

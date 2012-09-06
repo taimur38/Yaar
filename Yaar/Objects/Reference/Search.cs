@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Jarvis.Objects.Reference;
 using Newtonsoft.Json.Linq;
+using Yaar.Views;
 
 namespace Yaar.Objects.Reference
 {
@@ -12,6 +13,7 @@ namespace Yaar.Objects.Reference
     {
         public string Link { get; private set; }
         public string Description { get; private set; }
+        public string Source { get; private set; }
 
         public Search(string query)
         {
@@ -26,8 +28,14 @@ namespace Yaar.Objects.Reference
             if(result != null)
             {
                 var imdb = IMDB.FromQuery(query);
+                Source = "IMDB"; 
+                if (imdb.Response == "False")
+                {
+                    Description = "Movie not found";
+                    return;
+                }
                 Description =
-                    "{0} is a movie rated {1} by IMDB. It came out in {2} and the synopsis reads: ".Template(
+                    "{0} is a movie rated {1} by IMDB. It came out in {2} and the synopsis reads: {3}".Template(
                         imdb.Title, imdb.ImdbRating, imdb.Released, imdb.Plot);
                 Link = imdb.Page;
                 return;
@@ -36,9 +44,12 @@ namespace Yaar.Objects.Reference
             result = results.FirstOrDefault(o => o.Url.ToLower().Contains("wikipedia"));
             if(result != null)
             {
+                Source = "Wikipedia";
                 Description = new Wikipedia(result.Url) + Environment.NewLine;
                 Link = result.Url;
             }
+
+            ToastView.Create(Description, Source, false);
         }
     }
 }
