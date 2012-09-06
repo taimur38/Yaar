@@ -25,7 +25,7 @@ namespace Yaar.Tickers
                                       catch(Exception e)
                                       {
                                           var n = this.GetType().Name;
-                                          Brain.ListenerManager.CurrentListener.Output("Yaar, error at {0}: {1}".Template(n, e.Message));
+                                          Brain.ListenerManager.CurrentListener.Output("Error at {0}: {1}".Template(n, e.Message));
                                       }
                                   };
         }

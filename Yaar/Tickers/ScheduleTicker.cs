@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Yaar.Objects;
 using Yaar.Utilities;
+using Yaar.Views;
 
 namespace Yaar.Tickers
 {
     class ScheduleTicker : TickerBase
     {
-        private string _path = Constants.ConfigDirectory.FullName + "/schedule.txt";
+        private readonly string _path = Constants.ConfigDirectory.FullName + "/schedule.txt";
         public ScheduleTicker() : base(1.Minutes())
         {
             Tasks = new HashSet<ScheduledTask>();
@@ -34,6 +35,7 @@ namespace Yaar.Tickers
                 foreach (var task in expired)
                 {
                     Brain.ListenerManager.CurrentListener.Output(task.Description);
+                    ToastView.Create(task.Description, "ToDo", false);
                 }
                 Tasks = new HashSet<ScheduledTask>(Tasks.Where(o => o.DateTime > now));
 
